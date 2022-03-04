@@ -8,7 +8,7 @@ import com.nepplus.apipractice_okhttp_20220303.databinding.ActivityMainBinding
 import com.nepplus.apipractice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainBinding
 
@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
         binding= DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setupEvents()
-        setVaules()
+        setValues()
     }
 
 
-    fun setupEvents(){
+    override fun setupEvents(){
 
         binding.btnLogin.setOnClickListener {
 
@@ -62,8 +62,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setVaules(){
-
+    override fun setValues() {
+        TODO("Not yet implemented")
     }
+
 
 }
