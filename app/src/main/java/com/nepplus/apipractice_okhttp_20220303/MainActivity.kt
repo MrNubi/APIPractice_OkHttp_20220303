@@ -72,7 +72,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setValues() {
-        TODO("Not yet implemented")
+
     }
 
 
