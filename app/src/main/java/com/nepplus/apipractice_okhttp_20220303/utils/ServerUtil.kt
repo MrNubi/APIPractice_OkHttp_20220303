@@ -124,6 +124,25 @@ class ServerUtil {
                 .url(urlString)
                 .put(formData)
                 .build()
+
+            val client = OkHttpClient()
+            client.newCall(request).enqueue(object :Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    // 물리적인 연결실패 - 따로코딩 x 예정
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+                    val jsonObj =  JSONObject(bodyString)
+
+                    Log.d("서버응답: ", jsonObj.toString())
+
+                    handler?.onResponse(jsonObj)
+                }
+
+            })
+
         }
 
     }
