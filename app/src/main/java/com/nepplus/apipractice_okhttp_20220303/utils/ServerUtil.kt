@@ -1,6 +1,7 @@
 package com.nepplus.apipractice_okhttp_20220303.utils
 
 import okhttp3.FormBody
+import okhttp3.Request
 
 class ServerUtil {
 
@@ -26,6 +27,13 @@ class ServerUtil {
                 .add("email", id)
                 .add("password", pw)
                 .build()
+
+            // 제작 3) 모든 Request 정보를 종합한 객체 생성 (어느주소 + 어느 메소드로 + 어떤 파라미터를)
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .build()
+
 
         }
     }
