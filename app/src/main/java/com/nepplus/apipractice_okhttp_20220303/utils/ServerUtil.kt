@@ -2,6 +2,7 @@ package com.nepplus.apipractice_okhttp_20220303.utils
 
 import android.util.Log
 import okhttp3.*
+import org.json.JSONObject
 import java.io.IOException
 
 class ServerUtil {
@@ -53,7 +54,13 @@ class ServerUtil {
                     // 어떤 내용이던, 응답 자체는 잘 돌아온 경우 (그 내용은 성공/실패 일 수 있다)
                     // 응답: response 변수 -> 응답의 본문(body)만 보자
                     val bodyString =  response.body!!.string() // toString()고르면 안됨!, string()기능은 1회용. 변수에 담아두고 이용
-                    Log.d("서버테스트",bodyString)
+
+                    // 응답의 본문을 String으로 변환하면, JSON Encoding 적용된 상태(한글 깨짐)
+                    // JSONObject 객체로 응답본문String을 변환해주면, 한글이 복구됨
+                    // => UI에서도 JSONObject 이용해서, 데이터 추출 / 실제 활용
+                    val jsonObj = JSONObject(bodyString)
+
+                    Log.d("서버테스트",jsonObj.toString())
 
                 }
             })
