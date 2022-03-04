@@ -42,7 +42,7 @@ class MainActivity : BaseActivity() {
                             runOnUiThread {
 
                                 // 토스트를 띄우는 코드만, UI 전담 쓰레드에서 실행하도록
-                                Toast.makeText(this@MainActivity, "로그인성공", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(mContext, "로그인성공", Toast.LENGTH_SHORT).show()
                             }
                     }
                     else{
@@ -52,7 +52,7 @@ class MainActivity : BaseActivity() {
                             runOnUiThread {
                                 
                                 // 토스트를 띄우는 코드만, UI 전담 쓰레드에서 실행하도록
-                                Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                             }
                     }
 
