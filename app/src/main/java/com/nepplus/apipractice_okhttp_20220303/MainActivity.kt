@@ -50,8 +50,18 @@ class MainActivity : BaseActivity() {
                     if(code==200){
                             runOnUiThread {
 
-                                // 토스트를 띄우는 코드만, UI 전담 쓰레드에서 실행하도록
-                                Toast.makeText(mContext, "로그인성공", Toast.LENGTH_SHORT).show()
+//                                // 토스트를 띄우는 코드만, UI 전담 쓰레드에서 실행하도록
+//                                Toast.makeText(mContext, "로그인성공", Toast.LENGTH_SHORT).show()
+                                
+                                //[도전과제] 로그인 한 사람의 닉네임을 추출, "000님, 환영합니다.!" 로 토스트 띄우기
+                                val dataObj = jsonObject.getJSONObject("data")
+                                val userObj = dataObj.getJSONObject("user")
+                                val nickname =  userObj.getString("nick_name")
+
+                                runOnUiThread {
+                                    Toast.makeText(mContext, "${nickname}님, 환영합니다!", Toast.LENGTH_SHORT).show()
+                                }
+                                
                             }
                     }
                     else{
