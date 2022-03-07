@@ -27,7 +27,9 @@ class SignUpActivity : BaseActivity() {
 
         binding.edtId.addTextChangedListener {
 
-            Log.d("입력내용: ", it.toString())
+//            Log.d("입력내용: ", it.toString())
+            // 내용이 한글자라도 바뀌면, 무조건 재검사 요구 문장
+            binding.txtEmailCheckResult.text = "중복 확인을 해주세요"
         }
 
         binding.btnEmailCheck.setOnClickListener {
