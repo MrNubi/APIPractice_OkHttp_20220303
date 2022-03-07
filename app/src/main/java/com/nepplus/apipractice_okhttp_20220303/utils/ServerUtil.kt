@@ -1,5 +1,6 @@
 package com.nepplus.apipractice_okhttp_20220303.utils
 
+import android.content.Context
 import android.util.Log
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -180,6 +181,14 @@ class ServerUtil {
                     handler?.onResponse(jsonObj)
                 }
             })
+
+        }
+
+        // 연습 : 내정보 불러오기 (/user_info - GET)
+        // 토큰은, ContextUtil 클래스에서  getToken함수로 꺼내올 수 있다
+        // 토큰값 자체는 파라미터로 받아올 필요 없다 => ContextUtil를 불러서 사용하자
+        // 메모장에 접근할 수 있게, Context변수 하나를 미리 받아두자
+        fun getRequestMyInfo(context:Context, handler: JsonResponseHandler?){
 
 
         }
