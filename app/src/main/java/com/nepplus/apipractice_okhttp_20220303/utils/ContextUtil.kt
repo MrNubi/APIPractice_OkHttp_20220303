@@ -24,5 +24,13 @@ class ContextUtil {
             pref.edit().putString(TOKEN, token).apply()
 
         }
+
+        fun getToken(context: Context):String{
+
+            // 메모장 파일을 열자
+            val pref  =  context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            //
+            return  pref.getString(TOKEN, "")!!
+        }
     }
 }
