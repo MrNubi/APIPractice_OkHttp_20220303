@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.nepplus.apipractice_okhttp_20220303.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var  binding: ActivityMainBinding
 
@@ -13,5 +13,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
          binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        setupEvents()
+        setValues()
     }
+
+    override fun setupEvents() {
+
+    }
+
+    override fun setValues() {
+
+    }
+
 }
