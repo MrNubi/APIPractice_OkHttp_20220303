@@ -25,6 +25,37 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        // 닉네임 검사 버튼 기능
+        binding.btnNicknameCheck.setOnClickListener {
+
+            val inputNickname = binding.edtNickname.text.toString()
+
+            ServerUtil.getRequestDuplicatedCheck("NICK_NAME", inputNickname, object :ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+
+                    val code = jsonObj.getInt("code")
+
+                    runOnUiThread {
+                        when(code){
+                            200->{
+                                binding.txtNicknameCheckResult.text = "사용해도 좋은 닉네임입니다"
+                            }
+                            else->{
+                                binding.txtNicknameCheckResult.text = "다른 닉네임으로 다시검사해주세요"
+                            }
+                        }
+                    }
+                }
+            })
+        }
+
+        binding.edtNickname.addTextChangedListener { 
+            
+            binding.txtNicknameCheckResult.text = "중복 확인을 해주세요"
+        }
+
+
+
         binding.edtId.addTextChangedListener {
 
 //            Log.d("입력내용: ", it.toString())
