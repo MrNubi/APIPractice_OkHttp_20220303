@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.nepplus.apipractice_okhttp_20220303.R
 import com.nepplus.apipractice_okhttp_20220303.datas.TopicData
 
@@ -26,8 +28,15 @@ class TopicAdapter(
         val data = mList[position]
 
         val txtTitle =  row.findViewById<TextView>(R.id.txtTitle)
+        val imgTopicBackground = row.findViewById<ImageView>(R.id.imgTopicBackground)
 
         txtTitle.text = data.title
+        
+        // data -> 서버에서 준 주제 데이터
+        // imageURL 변수 파싱 => 이미지의 인터넷 주소
+        // 웹에 있는 이미지 -> 이미지뷰에 적용 -> Glide 라이브러리
+
+        Glide.with(mContext).load(data.imageUrl).into(imgTopicBackground)
 
         return row
     }
