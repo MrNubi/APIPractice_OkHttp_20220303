@@ -4,8 +4,8 @@ import org.json.JSONObject
 
 class UserData {
 
-    var id = 0,
-    var email ="",
+    var id = 0
+    var email =""
     var nickname =""
 
     companion object{
