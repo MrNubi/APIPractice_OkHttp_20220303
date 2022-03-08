@@ -47,7 +47,27 @@ class ViewTopicDetailActivity : BaseActivity() {
                 }
             })
             // 투표 현황 새로고침(응답)
+        }
 
+
+        // btnVote2 클릭 => 첫 진영의 id값을 찾아서, 거기에 투표
+        // 서버에 전달 => API 활용
+        binding.btnVote2.setOnClickListener {
+
+            ServerUtil.postRequestVote(mContext, mTopicData.sideList[1].id, object :ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObject: JSONObject) {
+
+                    // 토스트로, 서버가 알려준 현재 상황 (신규 투표 OR 재투표 OR 취소 등) 알려주기
+                    val message = jsonObject.getString("message")
+
+                    runOnUiThread {
+                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    // 변경된 득표 현황을 다시 불러오자
+                    getTopicDetailFromServer()
+                }
+            })
         }
     }
 
