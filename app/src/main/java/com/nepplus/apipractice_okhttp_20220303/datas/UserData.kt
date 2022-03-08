@@ -16,6 +16,8 @@ class UserData {
             userdata.id = jsonObject.getInt("id")
             userdata.email = jsonObject.getString("email")
             userdata.nickname = jsonObject.getString("nick_name")
+
+            return  userdata
         }
     }
 }
