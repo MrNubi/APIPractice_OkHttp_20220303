@@ -46,7 +46,46 @@ class ReplyData(
         // 구해진 시차를, 기존 시간에서 시간값으로 더해주기
         localCal.add(Calendar.HOUR, diffHour)
 
-        return sdf.format(localCal.time)
+        // 현재 시간과의 차이를 구해서, 차이 값에 따라 다른 양식으로 가공
+        // ex) 2분전 작성 => "2분전"
+        // ex) 5일전 작성 => "3월 10일 오전 5시 6분"
+        val now = Calendar.getInstance() // 현재 시간 표현 변수. (핸드폰 시간대가 적용되어있음)
+
+        val timeAgo =  now.timeInMillis - localCal.timeInMillis // 현재시간 -  작성일시 = 결과.  몇ms 차이나는가?
+
+        // 5초이내 => "방금 전"
+        if(timeAgo<5*1000){
+            return "방금 전"
+        }
+        // 1분이내 => "?초 전"
+        else if(timeAgo<60*1000){
+            // timeAgo :  ms단위로 계산됨 => ?초전을 보여주려면, 초단위로 변화
+            val diffSecond = timeAgo / 1000
+
+            return "${diffSecond}초전"
+        }
+        else if(timeAgo <1*60*60*1000){
+            // 1시간 이내에 작성된 글? => ? 분전
+            val diffMinute = timeAgo / 1000 / 60
+
+            return  "${diffMinute}분 전"
+        }
+        else if(timeAgo<24*60*60*1000){
+            // 24시간 이내에 작성된 글? =? ?시간전
+            val diffHour = timeAgo / 1000 / 60 / 60
+
+            return  "${diffHour}시간 전"
+        }
+        else if(timeAgo<10*24*60*60*1000){
+            // 10일 이내: ?일전
+            val diffDay = timeAgo / 1000 / 60 / 60 / 24
+
+            return "${diffDay}일 전"
+        }
+        else{
+            // 10일 이상: sdf로 가공해서 리턴
+            return  sdf.format(localCal.time)
+        }
     }
 
     companion object{
