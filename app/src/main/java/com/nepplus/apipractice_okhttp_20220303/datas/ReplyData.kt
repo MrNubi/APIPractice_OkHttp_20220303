@@ -1,6 +1,7 @@
 package com.nepplus.apipractice_okhttp_20220303.datas
 
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ReplyData(
@@ -40,6 +41,16 @@ class ReplyData(
 
             // 임시 2) 연도만 2021년으로 변경 (항목을 찍어서 변경)
             replyData.createdAt.set(Calendar.YEAR, 2021)
+
+            // 서버가 주는 양식을 보고, 그대로 적자
+            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+            // created_at으로 내려오는 문구
+            val createdAtStr = jsonObj.getString("created_at")
+
+            // createdAtStr 변수를 => Data로 변경(parse) => Calendar의 time에 대입
+            replyData.createdAt.time =sdf.parse((createdAtStr))
+
 
             return  replyData
         }
