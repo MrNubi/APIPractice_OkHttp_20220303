@@ -63,11 +63,9 @@ class ReplyAdapter(
         // 양식 4) 21년 3/5 (토) - 18:05
 //        val sdf = SimpleDateFormat("yy년 M/d (E) - HH:mm")
 
-        // 실제) 서버가 주는 created_at에 담긴 String을 => parse 해서, Calendar로 변경
-        // createdAt 변수의 일시 값으로 => parse 결과물 사용
 
         // 서버가 주는 양식을 보고, 그대로 적자
-        val sdf = SimpleDateFormat("")
+        val sdf = SimpleDateFormat("yy년-M/d(E) HH:mm")
 
         // sdf.format( Date객체 ) => 지정해둔 양식의 String으로 가공
         // createdAt : Calendar / format의 피라미터 : Date => Calendar의 내용물인 time 변수가 Date

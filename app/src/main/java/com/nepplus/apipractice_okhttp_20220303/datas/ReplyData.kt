@@ -42,10 +42,13 @@ class ReplyData(
             // 임시 2) 연도만 2021년으로 변경 (항목을 찍어서 변경)
             replyData.createdAt.set(Calendar.YEAR, 2021)
 
+            // 실제) 서버가 주는 created_at에 담긴 String을 => parse 해서, Calendar로 변경
+            // createdAt 변수의 일시 값으로 => parse 결과물 사용
+
             // 서버가 주는 양식을 보고, 그대로 적자
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-            // created_at으로 내려오는 문구
+            // created_at으로 내려오는 문구 (서버가 주는 String 임시저장)
             val createdAtStr = jsonObj.getString("created_at")
 
             // createdAtStr 변수를 => Data로 변경(parse) => Calendar의 time에 대입
