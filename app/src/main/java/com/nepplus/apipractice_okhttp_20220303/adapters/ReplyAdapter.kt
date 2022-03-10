@@ -65,11 +65,13 @@ class ReplyAdapter(
 
 
         // 서버가 주는 양식을 보고, 그대로 적자
-        val sdf = SimpleDateFormat("yy년-M/d(E) HH:mm")
+//        val sdf = SimpleDateFormat("yy년-M/d(E) HH:mm")
 
         // sdf.format( Date객체 ) => 지정해둔 양식의 String으로 가공
         // createdAt : Calendar / format의 피라미터 : Date => Calendar의 내용물인 time 변수가 Date
-        txtCreatedAt.text = sdf.format(data.createdAt.time)
+//        txtCreatedAt.text = sdf.format(data.createdAt.time)
+
+        txtCreatedAt.text = data.getFomattedCreatedAt()
 
         return row
     }
