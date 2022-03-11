@@ -17,6 +17,11 @@ class ReplyData(
     // 일시 데이터를 변경 => 내부의 숫자만 변경. 변수에 새 객체 대입X => val로 써도 됨
     val createdAt = Calendar.getInstance()
 
+    // 답글 / 좋아요 / 싫어요
+    var reReplayCount = 0
+    var likeCount = 0
+    var hateCount = 0
+
     // 보조 생성자 추가 연습: 파라미터X
     constructor() : this(0, "내용없음")
 
@@ -122,6 +127,9 @@ class ReplyData(
             // createdAtStr 변수를 => Data로 변경(parse) => Calendar의 time에 대입
             replyData.createdAt.time =sdf.parse((createdAtStr))
 
+            replyData.reReplayCount = jsonObj.getInt("reply_count")
+            replyData.likeCount =  jsonObj.getInt("like_count")
+            replyData.hateCount = jsonObj.getInt("dislike_count")
 
             return  replyData
         }

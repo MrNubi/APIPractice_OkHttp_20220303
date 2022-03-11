@@ -36,6 +36,10 @@ class ReplyAdapter(
         val txtReplyContent = row.findViewById<TextView>(R.id.txtReplyContent)
         val txtCreatedAt =  row.findViewById<TextView>(R.id.txtCreatedAt)
 
+        val txtReReplyCount = row.findViewById<TextView>(R.id.txtReReplyCount)
+        val txtLikeCount = row.findViewById<TextView>(R.id.txtLikeCount)
+        val txtHateCount = row.findViewById<TextView>(R.id.txtHateCount)
+
         txtReplyContent.text = data.content
         txtWriterNickname.text = data.writer.nickname
         txtSelectedSide.text =  "${data.selectedSide.title}"
@@ -72,6 +76,10 @@ class ReplyAdapter(
 //        txtCreatedAt.text = sdf.format(data.createdAt.time)
 
         txtCreatedAt.text = data.getFomattedCreatedAt()
+
+        txtReReplyCount.text ="답글 ${data.reReplayCount}"
+        txtLikeCount.text ="좋아요 ${data.likeCount}"
+        txtHateCount.text ="싫어요 ${data.hateCount}"
 
         return row
     }
