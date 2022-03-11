@@ -70,13 +70,7 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
-        // 임시 테스트 -> 액션바 커스텀 모드
-        val defaultActionBar = supportActionBar!!
-        defaultActionBar.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        defaultActionBar.setCustomView(R.layout.my_custom_action_bar)
 
-        val toolbar =  defaultActionBar.customView.parent as Toolbar
-        toolbar.setContentInsetsAbsolute(0, 0)
 
 //        // 화면의 텍스트뷰에 닉네임을 보여주기 위한 작업
 //        ServerUtil.getRequestMyInfo(mContext, object :ServerUtil.JsonResponseHandler{

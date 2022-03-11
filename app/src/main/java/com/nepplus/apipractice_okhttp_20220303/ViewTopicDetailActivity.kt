@@ -30,6 +30,7 @@ class ViewTopicDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_topic_detail)
         mTopicData = intent.getSerializableExtra("topic") as TopicData
+
         setupEvents()
         setValues()
     }
