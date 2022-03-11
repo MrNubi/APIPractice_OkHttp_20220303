@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.nepplus.apipractice_okhttp_20220303.R
 import com.nepplus.apipractice_okhttp_20220303.datas.ReplyData
 import com.nepplus.apipractice_okhttp_20220303.datas.TopicData
+import com.nepplus.apipractice_okhttp_20220303.utils.ServerUtil
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -80,6 +82,21 @@ class ReplyAdapter(
         txtReReplyCount.text ="답글 ${data.reReplayCount}"
         txtLikeCount.text ="좋아요 ${data.likeCount}"
         txtHateCount.text ="싫어요 ${data.hateCount}"
+
+        txtLikeCount.setOnClickListener {
+
+            // 서버에 이 댓글에 좋아요 알림
+            ServerUtil.postRequestReplyLikeOrHate(
+                mContext,
+                data.id,
+                true,
+                object :ServerUtil.JsonResponseHandler{
+                    override fun onResponse(jsonObject: JSONObject) {
+
+                    }
+                }
+            )
+        }
 
         return row
     }
