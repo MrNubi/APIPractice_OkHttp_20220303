@@ -331,5 +331,61 @@ class ServerUtil {
 
         }
 
+        fun postRequestTopicReply(context: Context,topicId: Int, content:String, handler:JsonResponseHandler?){
+
+            // Request 제작 -> 실제 호출 -> 서버의 응답을, 화면에 전달
+
+            // 제작 1) 어느 주소(url) 로 접근할지? => 서버주소 + 기능주소
+            val urlString = "${BASE_URL}/topic_reply"
+
+            // 제작 2) 파라미터 담아주기 => 어떤 이름표 / 어느 공간에
+            val formData = FormBody.Builder()
+                .add("topic_id", topicId.toString())
+                .add("content", content)
+                .build()
+
+            // 제작 3) 모든 Request 정보를 종합한 객체 생성 (어느주소 + 어느 메소드로 + 어떤 파라미터를)
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+            // 종합한 Request도 실제 호출을 해줘야 API 호출이 실행됨 (startActivity 같은 동작 필요함)
+            // 실제 호출: 클라이언트로써 동작 -> OkHttpClient 클래스
+            val client = OkHttpClient()
+
+            // OkHttpClient 객체를 이용-> 서버에 로그인 기능 실제 호출
+            // 호출을 했으면, 서버가 수행한 결과를 받아서 처리
+            // => 서버에 다녀와서 할일을 등록: enqueue(  Callback  )
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    // 실패: 서버에 연결 자체를 실패. 응답이 오지 않았다.
+                    // ex) 인터넷 끊김, 서버 접속 불가 등등 물리적 연결 실패
+                    // ex) 비번 틑려서 로그인 실패 : 서버 연결 성공, 응답도 돌아왔는데 -> 그 내용만 실패(물리적 실패X)
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    // 어떤 내용이던, 응답 자체는 잘 돌아온 경우 (그 내용은 성공/실패 일 수 있다)
+                    // 응답: response 변수 -> 응답의 본문(body)만 보자
+                    val bodyString =  response.body!!.string() // toString()고르면 안됨!, string()기능은 1회용. 변수에 담아두고 이용
+
+                    // 응답의 본문을 String으로 변환하면, JSON Encoding 적용된 상태(한글 깨짐)
+                    // JSONObject 객체로 응답본문String을 변환해주면, 한글이 복구됨
+                    // => UI에서도 JSONObject 이용해서, 데이터 추출 / 실제 활용
+                    val jsonObj = JSONObject(bodyString)
+
+                    Log.d("서버테스트",jsonObj.toString())
+
+                    // 실제 handler변수에,  jsonObj를 가지고 화면에서 어떻게 처리할지 계획이 들어와있다
+                    // (계획이  되어있을때만) 해당 계획을 실행하자
+                    handler?.onResponse(jsonObj)
+
+                }
+            })
+
+
+        }
+
     }
 }
