@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
@@ -70,7 +71,8 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
-
+        // 액션바의 벡버튼(BaseActivity가 물려줌) 숨김처림
+        btnBack.visibility = View.GONE
 
 //        // 화면의 텍스트뷰에 닉네임을 보여주기 위한 작업
 //        ServerUtil.getRequestMyInfo(mContext, object :ServerUtil.JsonResponseHandler{
