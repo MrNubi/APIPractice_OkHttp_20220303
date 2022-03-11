@@ -94,6 +94,8 @@ class SignUpActivity : BaseActivity() {
 
         binding.btnSignUp.setOnClickListener {
 
+            // <도전과제>  이메일 -@ 가 반드시 포함되어야함. 비밀번호가 8자이상, 닉네임 2자이상
+
             // <도전과제> 만약 이메일/ 닉네임 중복거사를 통과하지 못한 상태라면,
             // 토스트로 "이메일 중복검사를 통과해야합니다" 등의 문구만 출력, 가입 진행 X
 
