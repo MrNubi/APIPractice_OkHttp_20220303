@@ -19,9 +19,14 @@ abstract class BaseActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(supportActionBar !=null){
+        supportActionBar?.let {
+            // supportActionBar 변수가 null이 아닐때만 실행할 코드
             setCustomActionBar()
         }
+
+//        if(supportActionBar !=null){
+//            setCustomActionBar()
+//        }
     }
 
     // setupEvents / setValues 함수를 만들어두고, 물려주자
